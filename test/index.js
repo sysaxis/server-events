@@ -86,4 +86,9 @@ describe('ServerEvents/Eventing', function() {
 
         events2.emit('F', 150, 'value1', 'value2');
     });
+
+    after(function() {
+        events1.close();
+        events2.close();
+    });
 });
