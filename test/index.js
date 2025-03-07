@@ -1,5 +1,4 @@
 
-const Promise = require('bluebird');
 const {assert, expect} = require('chai');
 
 const {Timer} = require('./helpers');
@@ -22,13 +21,13 @@ describe('ServerEvents/Eventing', function() {
     before(function() {
 
         return Promise.all([
-            Promise.fromCallback(cb => events1.onready(cb)),
-            Promise.fromCallback(cb => events2.onready(cb))
+            new Promise(cb => events1.onready(cb)),
+            new Promise(cb => events2.onready(cb))
         ]);
     });
 
     it('should emit event E1 results', function(done) {
-        events1.on('E', 1).spread(function(a, b, c) {
+        events1.on('E', 1).then(function([a, b, c]) {
             expect(a).to.eq('arg 1');
             assert.deepEqual(b, {
                 f: 1,
@@ -63,7 +62,7 @@ describe('ServerEvents/Eventing', function() {
 
         events2.timeout = 4000;
         var timer = new Timer();
-        events2.on('B', 1).spread(function() {
+        events2.on('B', 1).then(function() {
             done('event was triggered before default timeout');
         }).catch(function() {
 

@@ -54,7 +54,7 @@ Events returned as promises. Provide a thenable if you wish to get the results a
 ```
 Or spreadable to receive them naturally.
 ```js
-    randomEvents.on('pi event', 314).spread(function(a, b, c) {
+    randomEvents.on('pi event', 314).then(function([a, b, c]) {
         // a ~ 'arg1', b ~ 1, c ~ {type: 'object'}
     });
 ```
