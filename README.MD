@@ -89,3 +89,5 @@ npm test
 ### 1.2.0
 
 - Upgraded to redis@4
+- Method `onready` removed.
+- Connection to Redis is must be initialized with `await events.init()`.
