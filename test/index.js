@@ -18,12 +18,9 @@ describe('ServerEvents/Eventing', function() {
 
     this.timeout(15000);
 
-    before(function() {
-
-        return Promise.all([
-            new Promise(cb => events1.onready(cb)),
-            new Promise(cb => events2.onready(cb))
-        ]);
+    before(async function() {
+        await events1.init()
+        await events2.init()
     });
 
     it('should emit event E1 results', function(done) {

@@ -24,9 +24,8 @@ const randomEvents = new ServerEvents({
     db: 0
 });
 
-randomEvents.onready(function() {
-    console.log('randomEvents are ready');
-});
+// connect to redis server
+await randomEvents.init()
 
 randomEvents.onerror(function(store, error) {
     // store can be either 'outputStore' or 'inputStore'
@@ -42,7 +41,7 @@ Events are referenced by name and id. The name specifies context while id can be
 
 Additional arguments passed to the emitter will be passed on to the listener.
 ```js
-    randomEvents.emit('pi event', 314, 'arg1', 1, {type: 'object'});
+    await randomEvents.emit('pi event', 314, 'arg1', 1, {type: 'object'});
 ```
 
 ### Waiting for events
@@ -83,3 +82,10 @@ The default timeout for all ServerEvents instances is 10000 ms. This can be over
 ```js
 npm test
 ```
+
+
+## Changelog
+
+### 1.2.0
+
+- Upgraded to redis@4
